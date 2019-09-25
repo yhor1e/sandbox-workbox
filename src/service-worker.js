@@ -5,3 +5,15 @@ if (self.workbox) {
 } else {
   console.log(`Boo! Workbox didn't load`);
 }
+
+self.workbox.routing.registerRoute(
+  /\.js$/,
+  new self.workbox.strategies.NetworkFirst()
+);
+
+self.workbox.routing.registerRoute(
+  /\.css$/,
+  new self.workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'css-cache'
+  })
+);
